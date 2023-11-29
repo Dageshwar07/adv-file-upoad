@@ -7,7 +7,6 @@ const {
   videoUpload,
   imageSizeReducer,
 } = require("../controllers/fileUpload");
-
 router.post("/localFileUpload", localFileUpload);
 router.post("/imageUpload", imageUpload);
 router.post("/videoUpload", videoUpload);

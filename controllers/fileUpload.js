@@ -4,11 +4,11 @@ const cloudinary = require("cloudinary").v2;
 exports.localFileUpload = async (req, res) => {
   try {
     const file = req.files.file;
-    console.log("FILE AAGYI JEE -> ", file);
+    console.log("file is comming-> ", file);
 
     let path =
       __dirname + "/files/" + Date.now() + `.${file.name.split(".")[1]}`;
-    console.log("PATH-> ", path);
+    console.log("path-> ", path);
 
     file.mv(path, (err) => {
       console.log(err);

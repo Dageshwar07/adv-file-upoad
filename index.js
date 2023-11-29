@@ -1,11 +1,13 @@
 //app create
 const express = require("express");
 const app = express();
+const color = require("colors");
 const twilio = require("twilio");
+const morgan = require("morgan");
 
 //PORt find krna h
 require("dotenv").config();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 //middleware add krne h
 app.use(express.json());
@@ -16,6 +18,7 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+app.use(morgan("dev"));
 
 //db se connect krnah
 const db = require("./config/database");
@@ -32,9 +35,9 @@ app.use("/api/v1/upload", Upload);
 // ____________________________________________________________________________________________________________________________________
 
 // Twilio configuration
-const accountSid = "AC8374430478f58582525f9c4a1d8bc06c";
-const authToken = "d28fb2d17cabca7772ee2cf3d769d27d";
-const twilioPhone = '+14439633283';
+const accountSid = process.env.ACCOUNT_SID;
+const authToken = process.env.AUTH_TOKEN;
+const twilioPhone = process.env.TWILIO_PHONE;
 
 const client = twilio(accountSid, authToken);
 
@@ -73,5 +76,5 @@ app.post("/send-otp", (req, res) => {
 
 //activate server
 app.listen(PORT, () => {
-  console.log(`App is running at ${PORT}`);
+  console.log(`App is running at ${PORT}`.rainbow);
 });
