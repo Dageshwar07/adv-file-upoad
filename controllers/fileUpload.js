@@ -91,7 +91,7 @@ exports.videoUpload = async (req, res) => {
 
     const file = req.files.videoFile;
 
-    const supportedTypes = ["mp4", "mov"];
+    const supportedTypes = ["mp4", "mkv"];
     const fileType = file.name.split(".")[1].toLowerCase();
     console.log("File Type:", fileType);
 
@@ -105,7 +105,6 @@ exports.videoUpload = async (req, res) => {
     console.log("Uploading");
     const response = await uploadFileToCloudinary(file, "Dageshwar");
     console.log(response);
-
     const fileData = await File.create({
       name,
       tags,
