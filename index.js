@@ -1,13 +1,12 @@
 //app create
 const express = require("express");
 const app = express();
-const color = require("colors");
 const twilio = require("twilio");
-const morgan = require("morgan");
+const color = require("colors");
 
 //PORt find krna h
 require("dotenv").config();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 //middleware add krne h
 app.use(express.json());
@@ -18,9 +17,8 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
-app.use(morgan("dev"));
 
-//db se connect krnah
+//db se connect krna h
 const db = require("./config/database");
 db.connect();
 
@@ -30,14 +28,15 @@ cloudinary.cloudinaryConnect();
 
 //api route mount krna h
 const Upload = require("./routes/FileUpload");
+const morgan = require("morgan");
 app.use("/api/v1/upload", Upload);
 
 // ____________________________________________________________________________________________________________________________________
 
 // Twilio configuration
-const accountSid = process.env.ACCOUNT_SID;
-const authToken = process.env.AUTH_TOKEN;
-const twilioPhone = process.env.TWILIO_PHONE;
+const accountSid = "AC8374430478f58582525f9c4a1d8bc06c";
+const authToken = "65e2aaf95cb4365e3867c409d685c154";
+const twilioPhone = "+14439633283";
 
 const client = twilio(accountSid, authToken);
 
@@ -76,5 +75,5 @@ app.post("/send-otp", (req, res) => {
 
 //activate server
 app.listen(PORT, () => {
-  console.log(`App is running at ${PORT}`.rainbow);
+  console.log(`App is running at ${PORT}`.bgMagenta);
 });

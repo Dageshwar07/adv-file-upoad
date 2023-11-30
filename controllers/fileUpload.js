@@ -24,10 +24,6 @@ exports.localFileUpload = async (req, res) => {
   }
 };
 
-function isFileTypeSupported(type, supportedTypes) {
-  return supportedTypes.includes(type);
-}
-
 async function uploadFileToCloudinary(file, folder, quality) {
   const options = { folder };
   console.log("temp file path", file.tempFilePath);
@@ -48,6 +44,9 @@ exports.imageUpload = async (req, res) => {
     const file = req.files.imageFile;
     console.log(file);
 
+    function isFileTypeSupported(type, supportedTypes) {
+      return supportedTypes.includes(type);
+    }
     const supportedTypes = ["jpg", "jpeg", "png"];
     const fileType = file.name.split(".")[1].toLowerCase();
     console.log("File Type:", fileType);
@@ -146,7 +145,7 @@ exports.imageSizeReducer = async (req, res) => {
     }
 
     console.log("Uploading");
-    const response = await uploadFileToCloudinary(file, "dageshwar", 90);
+    const response = await uploadFileToCloudinary(file, "dageshwar", 1);
     console.log(response);
 
     const fileData = await File.create({
